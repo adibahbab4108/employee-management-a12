@@ -4,12 +4,12 @@ import img3 from '../../assets/Services/R.jpeg'
 const Services = () => {
     return (
         <div className="mt-20">
-            <h1 className="text-4xl text-center my-10">We Can Do More Than Just HR</h1>
+            <h1 className="text-3xl font-bold text-center my-10">We Can Do More Than Just HR</h1>
             <div className="flex gap-4 justify-around">
                 <div className="card card-compact bg-base-100 w-96 shadow-xl">
                     <figure>
                         <img
-                        className='h-52 w-full object-cover'
+                            className='h-52 w-full object-cover'
                             src={img1}
                             alt="recruitment" />
                     </figure>
@@ -22,7 +22,7 @@ const Services = () => {
                 <div className="card card-compact bg-base-100 w-96 shadow-xl">
                     <figure>
                         <img
-                        className='h-52 w-full object-cover'
+                            className='h-52 w-full object-cover'
                             src={img2}
                             alt="interview" />
                     </figure>
@@ -35,7 +35,7 @@ const Services = () => {
                 <div className="card card-compact bg-base-100 w-96 shadow-xl">
                     <figure>
                         <img
-                        className='h-52 w-full object-cover'
+                            className='h-52 w-full object-cover'
                             src={img3}
                             alt="interview" />
                     </figure>

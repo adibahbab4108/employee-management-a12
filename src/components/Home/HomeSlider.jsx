@@ -36,16 +36,16 @@ const HomeSlider = () => {
                 className="mySwiper"
             >
                 <SwiperSlide>
-                    <img src={img1} alt="Slide 1" />
+                    <img className='' src={img1} alt="Slide 1" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={img2} alt="Slide 2" />
+                    <img className='' src={img2} alt="Slide 2" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={img3} alt="Slide 3" />
+                    <img className='' src={img3} alt="Slide 3" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={img4} alt="Slide 4" />
+                    <img className='' src={img4} alt="Slide 4" />
                 </SwiperSlide>
 
             </Swiper>

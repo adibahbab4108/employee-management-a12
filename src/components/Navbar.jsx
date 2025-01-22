@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
     const links = <>
         <li><Link>Home</Link></li>
-        <li><Link>Dashboard</Link></li>
-        <li><Link>Contact Us</Link></li>
+        <li><Link to="dashboard">Dashboard</Link></li>
+        <li><Link to="contact-us">Contact Us</Link></li>
         
     </>
     return (

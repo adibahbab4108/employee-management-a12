@@ -1,7 +1,6 @@
 
 const TestimonialCard = ({ testimonial }) => {
     const { name, designation, review, rating, date } = testimonial
-    console.log(name, designation, review, rating, date)
     return (
         <div className="h-72 bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 shadow-lg rounded-xl p-6 max-w-xs text-center mx-4">
             <p className="review italic text-gray-800 mb-4">{review}</p>

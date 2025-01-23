@@ -1,10 +1,16 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FaHome } from 'react-icons/fa';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
+import Swal from 'sweetalert2';
+import useAxiosPublic from '../hooks/useAxiosPublic';
+import axios from 'axios';
 
 const Register = () => {
-
+    const { createUser, updateUserProfile } = useAuth();
+    const axiosPublic = useAxiosPublic()
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -12,10 +18,58 @@ const Register = () => {
         reset,
     } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data);
-        alert('Registration successful!');
-        reset(); // Reset the form fields
+    const onSubmit = async (userData) => {
+        const { fullName, email, photo, userRole, password, confirmPassword } = userData
+
+        if (password != confirmPassword) return alert("Password Didn't Match")
+
+        //profile image upload to imgbb
+        const formData = new FormData()
+        formData.append('image', photo[0])
+        const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_ImgbbApi}`, formData)
+        const img_url = data.data.display_url;
+
+
+
+        createUser(email, password)
+            .then(() => {
+                updateUserProfile(fullName, img_url)
+                const userInfo = {
+                    name: fullName,
+                    email: email,
+                    photo: img_url,
+                    role: userRole
+                }
+                //storing user info to database
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Registration Successful",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Something went wrong!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    })
+
+                navigate('/login');
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: "Something Went Wrong!",
+                    text: `${error.message}`,
+                });
+            })
+        reset();
     };
 
     return (
@@ -48,7 +102,7 @@ const Register = () => {
                             {...register('email', {
                                 required: 'Email is required.',
                                 pattern: {
-                                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/,
+                                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                                     message: 'Invalid email address.',
                                 },
                             })}
@@ -57,7 +111,35 @@ const Register = () => {
                         />
                         {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
                     </div>
-
+                    {/* Upload photo */}
+                    <div className="mb-4">
+                        <label htmlFor="photo" className="block text-sm font-medium text-gray-700 mb-2">Photo URL:</label>
+                        <input
+                            id="photo"
+                            type="file"
+                            name='photo'
+                            accept='image/*'
+                            {...register('photo')}
+                            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        {errors.photo && <span className="text-red-500 text-sm">{errors.photo.message}</span>}
+                    </div>
+                    {/* User Role */}
+                    <div>
+                        <label htmlFor="userRole" className="block text-sm font-medium text-gray-700 mb-2">Role</label>
+                        <select
+                            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            {...register("userRole", {
+                                required: 'Role is required.',
+                            })}
+                            defaultValue=""
+                        >
+                            <option value="" disabled >Select your role</option>
+                            <option value="employee">Employee</option>
+                            <option value="hr">HR</option>
+                        </select>
+                        {errors.userRole && <span className="text-red-500 text-sm">{errors.userRole.message}</span>}
+                    </div>
                     {/* Password Field */}
                     <div className="mb-4">
                         <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">Password:</label>
@@ -68,7 +150,15 @@ const Register = () => {
                                 required: 'Password is required.',
                                 minLength: {
                                     value: 6,
-                                    message: 'Password must be at least 6 characters.',
+                                    message: 'Password must be at least 6 characters long.',
+                                },
+                                validate: {
+                                    hasLowercase: (value) =>
+                                        /[a-z]/.test(value) || 'Password must include at least one lowercase letter.',
+                                    hasUppercase: (value) =>
+                                        /[A-Z]/.test(value) || 'Password must include at least one uppercase letter.',
+                                    hasSpecialChar: (value) =>
+                                        /[!@#$%^&*(),.?":{}|<>]/.test(value) || 'Password must include at least one special character.',
                                 },
                             })}
                             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -104,7 +194,7 @@ const Register = () => {
                 {/* Login Redirect */}
                 <p className="mt-6 text-center text-sm text-gray-600">
                     Already have an account?{' '}
-                    <Link to="login" className="text-blue-500 font-medium hover:underline">Login</Link>
+                    <Link to="/login" className="text-blue-500 font-medium hover:underline">Login</Link>
                 </p>
             </div>
         </div>

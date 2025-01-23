@@ -18,7 +18,6 @@ const Testimonials = () => {
         };
         fetchReviews();
     }, [axiosPublic]);
-    console.log(testimonials)
     return (
         <div className="mt-20">
             <h1 className="text-3xl font-bold text-center my-10">Customer Testimonials</h1>

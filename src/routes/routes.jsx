@@ -5,6 +5,7 @@ import Dashboard from "../Layouts/Dashboard";
 import ContactUs from "../pages/ContactUs";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import UpdateUser from "../pages/UpdateUser ";
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +31,11 @@ export const router = createBrowserRouter([
         {
           path:'/register',
           element:<Register/>
+        },
+        {
+          path:'/users/:email',
+          element:<UpdateUser/>
+          
         }
       ]
     },

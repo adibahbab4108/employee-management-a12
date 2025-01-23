@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 const MainLayout = () => {
     const location = useLocation();
     const isLoginRegiserPage = location.pathname.includes('/login') || location.pathname.includes('/register')
-    console.log(isLoginRegiserPage)
+
     return (
         <div>
             {

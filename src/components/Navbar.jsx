@@ -1,12 +1,47 @@
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import { FaUser } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 
 const Navbar = () => {
+    const { user, logOut } = useAuth();
+    console.log(user)
+
+    const handleLogout = () => {
+        Swal.fire({
+            title: 'Are you sure?',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, log me out!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logOut()
+                    .then(() => {
+                        Swal.fire(
+                            'Logged out!',
+                            'You have been logged out.',
+                            'success'
+                        )
+                    });
+            }
+        });
+    };
+
+
+
+
+
+
+
+
+
     const links = <>
         <li><Link>Home</Link></li>
         <li><Link to="dashboard">Dashboard</Link></li>
         <li><Link to="contact-us">Contact Us</Link></li>
-        
+
     </>
     return (
         <div className="navbar bg-base-100">
@@ -42,7 +77,29 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to="login" className="btn">Login</Link>
+                {
+                    user ? <>
+                    <h1 className="text-xl font-bold mr-4">Hi, <span className="font-medium">{user.displayName}</span></h1>
+                        {
+                            <div className="dropdown dropdown-hover dropdown-end z-10">
+                                <div tabIndex={0} role="button" className=" m-1">
+                                    {
+                                        user.photoURL ?
+                                            <img className=" w-12 h-12 rounded-full" src={user.photoURL} alt="User Profile" />
+                                            :
+                                            <FaUser className="text-3xl" />
+                                    }
+                                </div>
+                                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                                    <li><Link to={`/users/${user?.email}`} className="btn">Update Profile</Link></li>
+                                    <li ><Link onClick={handleLogout} className="btn">Log Out</Link></li>
+                                </ul>
+                            </div>
+                        }
+                    </>
+                        :
+                        <Link to="login" className="btn">Login</Link>
+                }
             </div>
         </div>
     );

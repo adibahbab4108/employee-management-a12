@@ -3,39 +3,14 @@ import { useForm } from "react-hook-form";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
+import useUserInfo from "../hooks/useUserInfo";
 
 const UpdateUser = () => {
     const axiosPublic = useAxiosPublic();
     const { user } = useAuth();
     const email = user?.email;
-    const [userData, setUserData] = useState(null);
+    const { refetch, userData, isLoading, isError, error } = useUserInfo();
     const { register, handleSubmit, reset } = useForm();
-
-    // Fetch user data from the API
-    const fetchUserData = async () => {
-        try {
-            const response = await axiosPublic.get(`/users/${email}`);
-            const user = response.data[0];
-            setUserData(user);
-            // Pre-fill form fields with relevant data
-            reset({
-                bank_account_no: user?.bank_account_no || "",
-                salary: user?.salary || "",
-                designation: user?.designation || "",
-            });
-        } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: "Failed to fetch user data",
-                text: `${error}`,
-            })
-        }
-    };
-    useEffect(() => {
-        if (email) {
-            fetchUserData();
-        }
-    }, [email]);
 
     // Handle form submission
     const onSubmit = async (data) => {
@@ -52,8 +27,7 @@ const UpdateUser = () => {
                     title: " Already up-to-date",
                 })
             }
-            setUserData(response.data);
-            fetchUserData();
+            refetch();
         } catch (error) {
             Swal.fire({
                 icon: "error",

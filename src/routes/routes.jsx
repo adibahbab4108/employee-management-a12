@@ -6,6 +6,7 @@ import ContactUs from "../pages/ContactUs";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import UpdateUser from "../pages/UpdateUser ";
+import EmployeeWorkSheet from "../pages/Dashboard/EmployeeDashboard/EmployeeWorkSheet";
 
 export const router = createBrowserRouter([
     {
@@ -15,10 +16,6 @@ export const router = createBrowserRouter([
         {
             path:"/",
             element:<Home/>
-        },
-        {
-            path:"dashboard",
-            element:<Dashboard/>
         },
         {
           path:'contact-us',
@@ -33,10 +30,20 @@ export const router = createBrowserRouter([
           element:<Register/>
         },
         {
-          path:'/users/:email',
+          path:'/user',
           element:<UpdateUser/>
           
-        }
+        },
+        {
+            path:"dashboard",
+            element:<Dashboard/>,
+            children:[
+                {
+                  path:"/dashboard/worksheet",
+                  element:<EmployeeWorkSheet/>
+                }
+            ]
+        },
       ]
     },
   ]);

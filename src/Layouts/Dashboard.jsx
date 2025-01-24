@@ -1,8 +1,22 @@
+import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
+import EmployeeDashboard from "../pages/Dashboard/EmployeeDashboard/EmployeeDashboard";
+import HrDashboard from "../pages/Dashboard/HrDashboard/HrDashboard";
 
 const Dashboard = () => {
+    const isEmployee = true;
+    const isAdmin =false;
+    const isHR =false;
     return (
         <div>
-            Dashboard
+            {
+                isEmployee && <EmployeeDashboard />
+            }
+            {
+                isAdmin && <AdminDashboard />
+            }
+            {
+                isHR && <HrDashboard/>
+            }
         </div>
     );
 };

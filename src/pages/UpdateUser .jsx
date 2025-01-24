@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const UpdateUser = () => {
     const axiosPublic = useAxiosPublic();
@@ -11,41 +12,56 @@ const UpdateUser = () => {
     const { register, handleSubmit, reset } = useForm();
 
     // Fetch user data from the API
+    const fetchUserData = async () => {
+        try {
+            const response = await axiosPublic.get(`/users/${email}`);
+            const user = response.data[0];
+            setUserData(user);
+            // Pre-fill form fields with relevant data
+            reset({
+                bank_account_no: user?.bank_account_no || "",
+                salary: user?.salary || "",
+                designation: user?.designation || "",
+            });
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Failed to fetch user data",
+                text: `${error}`,
+            })
+        }
+    };
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await axiosPublic.get(`/users/${email}`);
-                const user = response.data[0];
-                setUserData(user);
-                // Pre-fill form fields with relevant data
-                reset({
-                    bank_account_no: user?.bank_account_no || "",
-                    salary: user?.salary || "",
-                    designation: user?.designation || "",
-                });
-            } catch (error) {
-                console.error("Failed to fetch user data:", error);
-            }
-        };
         if (email) {
             fetchUserData();
         }
-    }, [email, reset, axiosPublic]);
+    }, [email]);
 
     // Handle form submission
     const onSubmit = async (data) => {
-        console.log(data)
-
         try {
             const response = await axiosPublic.patch(`/users/${email}`, data);
-            alert("User updated successfully!");
-            setUserData(response.data); // Update displayed data
+
+            if (response.data.modifiedCount > 0) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Updated successfully",
+                })
+            } else {
+                Swal.fire({
+                    title: " Already up-to-date",
+                })
+            }
+            setUserData(response.data);
+            fetchUserData();
         } catch (error) {
-            console.error("Failed to update user:", error);
-            alert("Failed to update user data. Please try again.");
+            Swal.fire({
+                icon: "error",
+                title: "Failed to update user data",
+                text: `${error}`,
+            })
         }
     };
-
     return (
         <div className="max-w-2xl mx-auto p-4">
             {/* User Profile Section */}
@@ -75,11 +91,28 @@ const UpdateUser = () => {
                                 <span className="font-medium">Role:</span> {userData.role}
                             </p>
                         )}
-                        {userData.designation && (
-                            <p className="text-gray-700 mt-2 text-sm bg-blue-100  py-1 px-3 rounded-full shadow capitalize">
-                                <span className="font-medium">Designation:</span> {userData.designation}
-                            </p>
-                        )}
+
+                        <div className="border my-4 p-6 md:flex  gap-4">
+                            {userData.designation && (
+                                <p className="text-gray-700 mt-2 text-sm bg-blue-100  py-1 px-3 rounded-lg shadow capitalize">
+                                    <span className="font-medium">Designation:</span> {userData.designation}
+                                </p>
+                            )}
+                            {
+                                userData.bank_account_no && (
+                                    <p className="text-gray-700 mt-2 text-sm bg-blue-100  py-1 px-3 rounded-lg shadow capitalize">
+                                        <span className="font-medium">Bank Account No:</span> {userData.bank_account_no}
+                                    </p>
+                                )
+                            }
+                            {
+                                userData.salary && (
+                                    <p className="text-gray-700 mt-2 text-sm bg-blue-100  py-1 px-3 rounded-lg shadow capitalize">
+                                        <span className="font-medium">Current Salary:</span> ${userData.salary}
+                                    </p>
+                                )
+                            }
+                        </div>
                     </div>
                 </div>
 

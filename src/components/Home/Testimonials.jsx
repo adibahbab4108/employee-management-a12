@@ -2,22 +2,33 @@ import { useEffect, useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import TestimonialCard from "./TestimonialCard";
 import Marquee from "react-fast-marquee";
+import { useQuery } from "@tanstack/react-query";
 
 const Testimonials = () => {
     const axiosPublic = useAxiosPublic();
-    const [testimonials, setTestimonials] = useState([]);
 
-    useEffect(() => {
-        const fetchReviews = async () => {
-            try {
-                const response = await axiosPublic.get("/reviews");
-                setTestimonials(response.data);
-            } catch (error) {
-                console.error('Error fetching reviews:', error);
-            }
-        };
-        fetchReviews();
-    }, [axiosPublic]);
+    const { isPending, error, data: testimonials } = useQuery({
+        queryKey: ["testimonials"],
+        queryFn: async () => {
+            const { data } = await axiosPublic.get("/reviews");
+            return data
+        }
+    })
+    if (isPending) return 'Loading...'
+    if (error) return 'An error has occurred: ' + error.message
+
+    // useEffect(() => {
+    //     const fetchReviews = async () => {
+    //         try {
+    //             const response = await axiosPublic.get("/reviews");
+    //             setTestimonials(response.data);
+    //         } catch (error) {
+    //             console.error('Error fetching reviews:', error);
+    //         }
+    //     };
+    //     fetchReviews();
+    // }, [axiosPublic]);
+
     return (
         <div className="mt-20">
             <h1 className="text-3xl font-bold text-center my-10">Customer Testimonials</h1>

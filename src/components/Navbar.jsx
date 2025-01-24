@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
-    console.log(user)
 
     const handleLogout = () => {
         Swal.fire({
@@ -79,7 +78,7 @@ const Navbar = () => {
             <div className="navbar-end">
                 {
                     user ? <>
-                    <h1 className="text-xl font-bold mr-4">Hi, <span className="font-medium">{user.displayName}</span></h1>
+                    <h1 className="text-lg font-bold mr-4">Hi, <span className="font-medium">{user.displayName}</span></h1>
                         {
                             <div className="dropdown dropdown-hover dropdown-end z-10">
                                 <div tabIndex={0} role="button" className=" m-1">

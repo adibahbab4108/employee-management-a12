@@ -27,7 +27,7 @@ const Login = () => {
             })
             .catch(error => {
                 Swal.fire({
-                    title: "Something Went Wrong!",
+                    title: "Error Login",
                     text: `${error.message}`,
                     icon: "warning",
                 });

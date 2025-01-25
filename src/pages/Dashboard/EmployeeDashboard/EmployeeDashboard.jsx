@@ -24,7 +24,7 @@ const EmployeeDashboard = () => {
                 {/* Main Content */}
                 <div className="w-full  bg-emerald-400 p-12">
                     <h1 className="text-4xl font-bold">Employee Dashboard</h1>
-                    <p className="text-xl mt-2 font-semibold">Hi, {userData?.name } <small className="text-gray-400">({userData?.designation || "User"})</small></p>
+                    <p className="text-xl mt-2 font-semibold">Hi, {userData?.name } <small className="text-slate-600">({userData?.role || "User"})</small></p>
                     <Outlet />
                 </div>
             </div>

@@ -52,39 +52,35 @@ const UpdateUser = () => {
 
                     {/* User Info */}
                     <div className="mt-4 text-center">
-                        {userData.name && (
+                        {
                             <p className="text-2xl font-bold text-gray-800">Name: {userData.name}</p>
-                        )}
-                        {userData.email && (
+                        }
+                        {
                             <p className="text-gray-600 mt-2 text-sm ">
                                 <span className="font-medium ">Email:</span> {userData.email}
                             </p>
-                        )}
-                        {userData.role && (
+                        }
+                        {
                             <p className="text-gray-700 mt-2 text-sm bg-blue-100 py-1 px-3 rounded-full shadow capitalize">
-                                <span className="font-medium">Role:</span> {userData.role}
+                                <span className="font-medium u">Role:</span> {userData.role}
                             </p>
-                        )}
+                        }
 
                         <div className="border my-4 p-6 md:flex  gap-4">
-                            {userData.designation && (
-                                <p className="text-gray-700 mt-2 text-sm bg-blue-100  py-1 px-3 rounded-lg shadow capitalize">
-                                    <span className="font-medium">Designation:</span> {userData.designation}
-                                </p>
-                            )}
                             {
-                                userData.bank_account_no && (
-                                    <p className="text-gray-700 mt-2 text-sm bg-blue-100  py-1 px-3 rounded-lg shadow capitalize">
-                                        <span className="font-medium">Bank Account No:</span> {userData.bank_account_no}
-                                    </p>
-                                )
+                                <p className="text-gray-700 mt-2 text-sm bg-blue-100  py-1 px-3 rounded-lg shadow capitalize">
+                                    <span className="font-medium">Designation:</span> {userData.designation ||"N/A"}
+                                </p>
                             }
                             {
-                                userData.salary && (
                                     <p className="text-gray-700 mt-2 text-sm bg-blue-100  py-1 px-3 rounded-lg shadow capitalize">
-                                        <span className="font-medium">Current Salary:</span> ${userData.salary}
+                                        <span className="font-medium">Bank Account No:</span> {userData.bank_account_no || "N/A"}
                                     </p>
-                                )
+                            }
+                            {
+                                    <p className="text-gray-700 mt-2 text-sm bg-blue-100  py-1 px-3 rounded-lg shadow capitalize">
+                                        <span className="font-medium">Current Salary:</span> ${userData.salary || 0}
+                                    </p>
                             }
                         </div>
                     </div>

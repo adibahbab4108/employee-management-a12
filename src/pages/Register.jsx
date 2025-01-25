@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FaHome } from 'react-icons/fa';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../hooks/useAxiosPublic';
@@ -38,7 +38,9 @@ const Register = () => {
                     name: fullName,
                     email: email,
                     photo: img_url,
-                    role: userRole
+                    role: userRole,
+                    isVerified: false,
+
                 }
                 //storing user info to database
                 axiosPublic.post('/users', userInfo)

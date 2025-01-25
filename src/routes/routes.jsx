@@ -7,6 +7,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import UpdateUser from "../pages/UpdateUser ";
 import EmployeeWorkSheet from "../pages/Dashboard/EmployeeDashboard/EmployeeWorkSheet";
+import EmployeeList from "../pages/Dashboard/HrDashboard/EmployeeList";
 
 export const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
                 {
                   path:"/dashboard/worksheet",
                   element:<EmployeeWorkSheet/>
+                },
+                {
+                  path:"/dashboard/employee-list",
+                  element:<EmployeeList/>
                 }
             ]
         },

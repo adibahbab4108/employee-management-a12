@@ -8,47 +8,54 @@ import Register from "../pages/Register";
 import UpdateUser from "../pages/UpdateUser ";
 import EmployeeWorkSheet from "../pages/Dashboard/EmployeeDashboard/EmployeeWorkSheet";
 import EmployeeList from "../pages/Dashboard/HrDashboard/EmployeeList";
+import ErrorPage from "../pages/ErrorPage";
+import EmployeeDetails from "../pages/Dashboard/HrDashboard/EmployeeDetails";
 
 export const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <MainLayout/>,
-      children: [
-        {
-            path:"/",
-            element:<Home/>
-        },
-        {
-          path:'contact-us',
-          element:<ContactUs/>
-        },
-        {
-          path:'login',
-          element:<Login/>
-        },
-        {
-          path:'/register',
-          element:<Register/>
-        },
-        {
-          path:'/user',
-          element:<UpdateUser/>
-          
-        },
-        {
-            path:"dashboard",
-            element:<Dashboard/>,
-            children:[
-                {
-                  path:"/dashboard/worksheet",
-                  element:<EmployeeWorkSheet/>
-                },
-                {
-                  path:"/dashboard/employee-list",
-                  element:<EmployeeList/>
-                }
-            ]
-        },
-      ]
-    },
-  ]);
+  {
+    path: "/",
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Home />
+      },
+      {
+        path: 'contact-us',
+        element: <ContactUs />
+      },
+      {
+        path: 'login',
+        element: <Login />
+      },
+      {
+        path: '/register',
+        element: <Register />
+      },
+      {
+        path: '/user',
+        element: <UpdateUser />
+
+      },
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+        children: [
+          {
+            path: "/dashboard/worksheet",
+            element: <EmployeeWorkSheet />
+          },
+          {
+            path: "/dashboard/employee-list",
+            element: <EmployeeList />
+          },
+          {
+            path: "/dashboard/employee-details",
+            element: <EmployeeDetails />
+          }
+        ]
+      },
+    ]
+  },
+]);

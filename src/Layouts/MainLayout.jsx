@@ -4,14 +4,19 @@ import Navbar from "../components/Navbar";
 
 const MainLayout = () => {
     const location = useLocation();
-    const isLoginRegiserPage = location.pathname.includes('/login') || location.pathname.includes('/register') || location.pathname.includes('/dashboard')
+    const isLoginRegiserPage = location.pathname.includes('/login') || 
+    location.pathname.includes('/register') || 
+    location.pathname.includes('/dashboard') ||
+    location.pathname.includes('/user') 
 
     return (
         <div>
             {
                 !isLoginRegiserPage && <Navbar />
             }
-            <Outlet />
+            <div className="min-h-[calc(100vh-292px)]">
+                <Outlet />
+            </div>
             {
                 !isLoginRegiserPage && <Footer />
             }

@@ -37,7 +37,7 @@ const UpdateUser = () => {
         }
     };
     return (
-        <div className="max-w-2xl mx-auto p-4">
+        <div className="max-w-4xl mx-auto p-4 bg-green-100 min-h-screen pt-10">
             {/* User Profile Section */}
             {userData ? (
                 <div className="bg-white p-6 rounded-lg shadow-md mb-6 flex flex-col items-center">

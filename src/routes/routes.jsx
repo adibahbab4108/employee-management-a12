@@ -10,6 +10,7 @@ import EmployeeWorkSheet from "../pages/Dashboard/EmployeeDashboard/EmployeeWork
 import EmployeeList from "../pages/Dashboard/HrDashboard/EmployeeList";
 import ErrorPage from "../pages/ErrorPage";
 import EmployeeDetails from "../pages/Dashboard/HrDashboard/EmployeeDetails";
+import EmployeeRecords from "../pages/Dashboard/EmployeeRecords";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
           {
             path: "/dashboard/employee-details",
             element: <EmployeeDetails />
+          },
+          {
+            path: "/dashboard/progress",
+            element: <EmployeeRecords />
           }
         ]
       },

@@ -18,7 +18,7 @@ const EmployeeWorkSheet = () => {
         date: new Date().toISOString().split("T")[0], // Default to current date
     });
 
-    // Fetch tasks from the backend on component mount
+    // Fetch tasks from the backend on component amount
     useEffect(() => {
         if (userData?.email) {
             axiosPublic.get(`/employee-worksheet?email=${userData.email}`)

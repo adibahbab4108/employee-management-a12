@@ -4,8 +4,8 @@ import HrDashboard from "../pages/Dashboard/HrDashboard/HrDashboard";
 
 const Dashboard = () => {
     const isEmployee = false;
-    const isAdmin =false;
-    const isHR =true;
+    const isAdmin =true;
+    const isHR =false;
     return (
         <div>
             {

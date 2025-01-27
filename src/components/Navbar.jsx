@@ -23,7 +23,7 @@ const Navbar = () => {
                             'Logged out!',
                             'You have been logged out.',
                             'success'
-                        )
+                        ).then(() => { window.location.reload(); })
                     });
             }
         });
@@ -39,7 +39,7 @@ const Navbar = () => {
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                        <RiMenu2Fill className="text-2xl"/>
+                        <RiMenu2Fill className="text-2xl" />
                     </div>
                     <ul
                         tabIndex={0}

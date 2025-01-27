@@ -5,18 +5,16 @@ const FiredMessage = () => {
     const { logOut } = useAuth();
     const navigate = useNavigate();
     useEffect(() => {
-
         const timer = setTimeout(() => {
             logOut();
-        }, 10000);
+            navigate('/')
+        }, 5000);
 
         return () => clearTimeout(timer);
     }, []);
 
     const handleLogOut = () => {
         logOut();
-        navigate('/')
-
     };
 
     return (

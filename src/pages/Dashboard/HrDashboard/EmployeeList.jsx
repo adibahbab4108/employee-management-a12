@@ -52,10 +52,8 @@ const EmployeeList = () => {
             year: formData.get("year"),
             isPending: true
         };
-        console.log(payload, selectedEmployee)
         try {
             const response = await axiosPublic.post('/payroll', payload);
-            console.log(response.data)
             if (response.data.success) {
                 Swal.fire({
                     icon: "success",

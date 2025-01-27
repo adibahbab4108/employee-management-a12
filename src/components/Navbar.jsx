@@ -71,14 +71,14 @@ const Navbar = () => {
                                     }
                                 </div>
                                 <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                                    <li><Link to='/user' className="btn">Update Profile</Link></li>
+                                    <li><Link to='/user' className="btn">Profile</Link></li>
                                     <li ><Link onClick={handleLogout} className="btn">Log Out</Link></li>
                                 </ul>
                             </div>
                         }
                     </>
                         :
-                        <Link to="login" className="btn">Login</Link>
+                        <Link to="/login" className="btn">Login</Link>
                 }
             </div>
         </div>

@@ -1,5 +1,5 @@
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaHome } from "react-icons/fa";
 import SocialLogin from '../components/SocialLogin/SocialLogin';
 import useAuth from '../hooks/useAuth';
@@ -8,6 +8,7 @@ const Login = () => {
 
     const { signIn, setUser } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -23,7 +24,7 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1000
                 });
-                navigate('/')
+                navigate(location?.state?.pathname || '/')
             })
             .catch(error => {
                 Swal.fire({

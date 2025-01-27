@@ -6,9 +6,8 @@ const HrDashboard = () => {
     const { userData } = useUserInfo()
     const location = useLocation();
     const isProfilePage = location.pathname.includes("/employee-details") ||
-    location.pathname.includes("/progress") ||
-    location.pathname.includes("/employee-list") 
-    console.log(isProfilePage)
+        location.pathname.includes("/progress") ||
+        location.pathname.includes("/employee-list")
     return (
         <>
             <div className="flex flex-col md:flex-row">

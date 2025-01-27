@@ -107,7 +107,7 @@ const UpdateUser = () => {
                         id="bank_account_no"
                         className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Your bank account number"
-                        {...register("bank_account_no", { required: true })}
+                        {...register("bank_account_no")}
                     />
                 </div>
 
@@ -133,7 +133,7 @@ const UpdateUser = () => {
                     <select
                         id="designation"
                         className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        {...register("designation", { required: true })}
+                        {...register("designation")}
                         defaultValue=""
                     >
                         <option value="" disabled>Select Designation</option>

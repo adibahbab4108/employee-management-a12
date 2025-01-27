@@ -4,7 +4,6 @@ import useUserInfo from '../../../hooks/useUserInfo';
 
 const AdminDashboard = () => {
     const { userData } = useUserInfo()
-    console.log(userData)
     return (
         <div>
             <div className="flex flex-col md:flex-row">
@@ -69,7 +68,7 @@ const AdminDashboard = () => {
                 <div className="w-full bg-emerald-400 p-6 md:p-12">
 
                     <div className="text-center md:text-left">
-                        <h1 className="text-3xl md:text-4xl font-bold">HR Dashboard</h1>
+                        <h1 className="text-3xl md:text-4xl font-bold">Admin Dashboard</h1>
                         <p className="text-lg md:text-xl mt-2 font-semibold">
                             Hi, {userData?.name}{" "}
                             <small className="text-slate-600">

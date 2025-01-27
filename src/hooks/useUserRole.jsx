@@ -7,7 +7,6 @@ const useUserRole = () => {
     const { user } = useAuth();
     const [userRole, setUserRole] = useState(null)
     const axiosPublic = useAxiosPublic();
-    console.log(user?.email)
     const { data, isLoading, isError } = useQuery({
         queryKey: ['userRole'],
         queryFn: async () => {

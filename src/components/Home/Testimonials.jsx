@@ -3,6 +3,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import TestimonialCard from "./TestimonialCard";
 import Marquee from "react-fast-marquee";
 import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../LoadingSpinner";
 
 const Testimonials = () => {
     const axiosPublic = useAxiosPublic();
@@ -14,7 +15,7 @@ const Testimonials = () => {
             return data
         }
     })
-    if (isPending) return 'Loading...'
+    if (isPending) return <LoadingSpinner />
     if (error) return 'An error has occurred: ' + error.message
 
     // useEffect(() => {

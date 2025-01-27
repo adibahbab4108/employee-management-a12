@@ -1,3 +1,4 @@
+import LoadingSpinner from "../components/LoadingSpinner";
 import useAuth from "../hooks/useAuth";
 import useUserRole from "../hooks/useUserRole";
 import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
@@ -5,8 +6,9 @@ import EmployeeDashboard from "../pages/Dashboard/EmployeeDashboard/EmployeeDash
 import HrDashboard from "../pages/Dashboard/HrDashboard/HrDashboard";
 
 const Dashboard = () => {
-    const { userRole, isLoading, isError } = useUserRole()
-    console.log(userRole)
+    const { userRole, isLoading, isError } = useUserRole();
+
+    if(isLoading) return <LoadingSpinner/>
     return (
         <div>
             {

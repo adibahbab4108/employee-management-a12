@@ -29,7 +29,7 @@ const MessageRequest = () => {
                 <h1 className="text-3xl font-semibold">Message Requests</h1>
                 <button
                     onClick={() => setIsGridView(!isGridView)}
-                    className={`px-4 py-2 rounded-lg transition ${isGridView ? 'bg-blue-600 text-white' : 'bg-amber-800 text-white'
+                    className={`px-4 py-2 rounded-lg transition ${isGridView ? 'bg-blue-600 text-white' : 'bg-lime-600 text-white'
                         }`}
                 >
                     {isGridView ? 'Switch to Table View' : 'Switch to Grid View'}

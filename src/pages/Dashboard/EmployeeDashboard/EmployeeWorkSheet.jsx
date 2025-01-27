@@ -23,7 +23,6 @@ const EmployeeWorkSheet = () => {
         if (userData?.email) {
             axiosPublic.get(`/employee-worksheet?email=${userData.email}`)
                 .then((response) => {
-                    console.log("Fetched worksheet:", response.data);
                     setTasks(response.data?.worksheet || []);
                 })
                 .catch((error) => {
@@ -95,12 +94,10 @@ const EmployeeWorkSheet = () => {
             newHoursWorked: formData.hoursWorked,
             newDate: formData.date,
         };
-        console.log("Payload for update:", payload);
 
         try {
             // Send the update request to the server
             const response = await axiosPublic.put('/employee-worksheet', payload);
-            console.log(response)
             
             if (response.status === 200) {
                 Swal.fire({
@@ -138,7 +135,6 @@ const EmployeeWorkSheet = () => {
         try {
             // Send the DELETE request to the backend
             const response = await axiosPublic.delete('/employee-worksheet', payload);
-            console.log(response)
             if (response.status === 200) {
                 Swal.fire({
                     icon: "success",

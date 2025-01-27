@@ -30,19 +30,13 @@ const EmployeeBarChart = ({ employee }) => {
             return data
         }
     })
-    console.log(userPaymentData)
-    console.log(userPaymentData);
 
     const data = userPaymentData?.map((payment, index) => {
-        console.log(payment.month, payment.salary); // Debugging log
         return {
             name: payment.month, // Use month as the name for the X-axis
             uv: parseFloat(payment.salary), // Salary for the Y-axis (ensure it's a number)
         };
     });
-    
-    // Log the transformed data to verify
-    console.log(data);
     
 
 

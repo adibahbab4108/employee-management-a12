@@ -13,7 +13,6 @@ const AllEmployee = () => {
             return data;
         }
     })
-    // console.log(all_Employee)
     const handleMakeHR = (id) => {
         const user = all_Employee.find((employee) => employee._id === id);
         // Confirmation dialog
@@ -26,8 +25,6 @@ const AllEmployee = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 const response = await axiosPublic.patch("/admin/make-hr", { id });
-                console.log(response.data)
-
                 if (response.data.acknowledged) {
                     refetch()
                     Swal.fire({
@@ -75,7 +72,6 @@ const AllEmployee = () => {
                         name: user.name,
                         email: user.email,
                     });
-                    console.log(response.data)
 
                     if (response.data.acknowledged) {
                         Swal.fire({
@@ -102,10 +98,8 @@ const AllEmployee = () => {
     };
 
     const handleUpdateSalary = async (e, id) => {
-        console.log(e.target.value, id)
         const salary = e.target.value;
         const { data } = await axiosPublic.patch("/admin/update-salary", { id, salary })
-        console.log(data)
         if (data.modifiedCount > 0) {
             Swal.fire({
                 title: "Salary Updated",
@@ -123,8 +117,8 @@ const AllEmployee = () => {
         <div>
             <button onClick={() => setView(!view)}
                 className={` px-6 py-3  rounded-full  ${view
-                        ? "bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-lg hover:shadow-2xl"
-                        : "bg-gradient-to-r from-green-500 to-green-700 text-white shadow-lg hover:shadow-2xl"
+                    ? "bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-lg hover:shadow-2xl"
+                    : "bg-gradient-to-r from-green-500 to-green-700 text-white shadow-lg hover:shadow-2xl"
                     }`}
             >{view ? "Grid View" : "Table View"}</button>
             {
@@ -132,7 +126,7 @@ const AllEmployee = () => {
                     <div className="overflow-x-auto">
                         <table className="table w-full">
                             <thead>
-                                <tr>
+                                <tr className='text-blue-900'>
                                     <th>Name</th>
                                     <th>Designation</th>
                                     <th>Salary ($)</th>
@@ -152,25 +146,30 @@ const AllEmployee = () => {
                                                     onBlur={(e) => handleUpdateSalary(e, employee._id)}
                                                     type="number"
                                                     defaultValue={employee.salary}
+                                                    disabled={employee.role === "admin"}
                                                     className='text-center w-24 rounded-md '
                                                 />
                                             </td>
                                             <td>
-                                                {employee.role !== "hr" ?
+                                                {employee.role === "admin" ? (
+                                                    <button className="btn btn-xs cursor-wait bg-green-300 ">Admin</button>
+                                                ) : employee.role !== "hr" ? (
                                                     <button
                                                         onClick={() => handleMakeHR(employee._id)}
                                                         className="btn btn-xs btn-primary"
                                                     >
                                                         Make HR
                                                     </button>
-                                                    :
-                                                    <button className='btn btn-xs btn-info'>HR</button>
-                                                }
+                                                ) : (
+                                                    <button className="btn btn-xs btn-info">HR</button>
+                                                )}
+
                                             </td>
                                             <td>
                                                 <button
                                                     onClick={() => handleFire(employee._id)}
                                                     className="btn btn-error btn-xs text-white"
+                                                    disabled={employee.role === "admin"}
                                                 >
                                                     Fire
 

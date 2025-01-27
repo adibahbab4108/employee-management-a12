@@ -25,8 +25,6 @@ const EmployeeRecords = () => {
         }
     }, [data]);
 
-    console.log(worksheet)
-
     const employeeNames = data?.map((employee) => employee.name);
 
     const allDates = worksheet?.map((work) => {
@@ -39,9 +37,6 @@ const EmployeeRecords = () => {
             allDates.map((date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`)
         ),
     ];
-    
-
-    // console.log(employeeNames, allDates)
 
 
     // Filter the records

@@ -14,6 +14,8 @@ import EmployeeRecords from "../pages/Dashboard/EmployeeRecords";
 import AllEmployee from "../pages/Dashboard/AdminDashboard/AllEmployee";
 import Payroll from "../pages/Dashboard/AdminDashboard/Payroll";
 import MessageRequest from "../pages/Dashboard/AdminDashboard/MessageRequest";
+import PrivateRoute from "./PrivateRoute";
+import EmployeePaymentHistory from "../pages/Dashboard/EmployeeDashboard/EmployeePaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -44,11 +46,18 @@ export const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <Dashboard />,
+        element: <PrivateRoute>
+          <Dashboard />
+        </PrivateRoute>,
         children: [
+          //....Employee Part.......
           {
             path: "/dashboard/worksheet",
             element: <EmployeeWorkSheet />
+          },
+          {
+            path: "/dashboard/payment-history",
+            element: <EmployeePaymentHistory/>
           },
           //HR part..............
           {

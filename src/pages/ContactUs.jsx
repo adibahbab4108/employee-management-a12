@@ -12,7 +12,6 @@ const ContactUs = () => {
   } = useForm();
 
   const onSubmit = async (submittedData) => {
-    console.log(submittedData);
     const { data } = await axiosPublic.post('/contact-form-data', submittedData)
     if (data.acknowledged) {
       Swal.fire({

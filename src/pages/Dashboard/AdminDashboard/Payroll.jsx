@@ -14,12 +14,11 @@ const [paymentStatusBtn, setPaymentStatusBtn] =useState("Pending")
             return data
         }
     })
-    console.log(employeePayroll)
 
     const handlePay = async (id) => {
-        console.log(id)
+        
         const { data } = await axiosPublic.patch('/admin/update-payroll-status', { id })
-        console.log(data)
+        
         if (data.modifiedCount > 0) {
             Swal.fire({
                 title: 'Payment Approved',

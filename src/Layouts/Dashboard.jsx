@@ -1,21 +1,22 @@
+import useAuth from "../hooks/useAuth";
+import useUserRole from "../hooks/useUserRole";
 import AdminDashboard from "../pages/Dashboard/AdminDashboard/AdminDashboard";
 import EmployeeDashboard from "../pages/Dashboard/EmployeeDashboard/EmployeeDashboard";
 import HrDashboard from "../pages/Dashboard/HrDashboard/HrDashboard";
 
 const Dashboard = () => {
-    const isEmployee = false;
-    const isAdmin =true;
-    const isHR =false;
+    const { userRole, isLoading, isError } = useUserRole()
+    console.log(userRole)
     return (
         <div>
             {
-                isEmployee && <EmployeeDashboard />
+                userRole === "employee" && <EmployeeDashboard />
             }
             {
-                isAdmin && <AdminDashboard />
+                userRole === "admin" && <AdminDashboard />
             }
             {
-                isHR && <HrDashboard/>
+                userRole === "hr" && <HrDashboard />
             }
         </div>
     );

@@ -7,11 +7,11 @@ const useUserInfo = () => {
     const axiosPublic = useAxiosPublic();
 
     const { refetch, data: userData = null, isLoading, isError, error } = useQuery({
-        queryKey: ["userInfo", user?.email],
+        queryKey: ["userInformation"],
         queryFn: async () => {
             const { data } = await axiosPublic.get(`/users?email=${user?.email}`);
             console.log(data)
-            return data[0];
+            return data;
         },
         enabled: !!user?.email, // Only run the query if the email exists
     });

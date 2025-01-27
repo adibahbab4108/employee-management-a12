@@ -1,7 +1,10 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import useUserInfo from '../../../hooks/useUserInfo';
 
 const AdminDashboard = () => {
+    const { userData } = useUserInfo()
+    console.log(userData)
     return (
         <div>
             <div className="flex flex-col md:flex-row">
@@ -35,7 +38,17 @@ const AdminDashboard = () => {
                                     isActive ? "font-bold text-blue-300" : "hover:text-blue-300"
                                 }
                             >
-                                Progress
+                                Payroll
+                            </NavLink>
+                        </li>
+                        <li className="my-1">
+                            <NavLink
+                                to="/dashboard/message-request"
+                                className={({ isActive }) =>
+                                    isActive ? "font-bold text-blue-300" : "hover:text-blue-300"
+                                }
+                            >
+                                Message Request
                             </NavLink>
                         </li>
                         <div className="divider"></div>
@@ -54,17 +67,17 @@ const AdminDashboard = () => {
 
                 {/* Main Content */}
                 <div className="w-full bg-emerald-400 p-6 md:p-12">
-                    {/* {!isProfilePage && (
-                        <div className="text-center md:text-left">
-                            <h1 className="text-3xl md:text-4xl font-bold">HR Dashboard</h1>
-                            <p className="text-lg md:text-xl mt-2 font-semibold">
-                                Hi, {userData?.name}{" "}
-                                <small className="text-slate-600">
-                                    ({userData?.role || "User"})
-                                </small>
-                            </p>
-                        </div>
-                    )} */}
+
+                    <div className="text-center md:text-left">
+                        <h1 className="text-3xl md:text-4xl font-bold">HR Dashboard</h1>
+                        <p className="text-lg md:text-xl mt-2 font-semibold">
+                            Hi, {userData?.name}{" "}
+                            <small className="text-slate-600">
+                                ({userData?.role || "User"})
+                            </small>
+                        </p>
+                    </div>
+
                     <Outlet />
                 </div>
             </div>

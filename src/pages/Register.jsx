@@ -131,9 +131,7 @@ const Register = () => {
                         <label htmlFor="userRole" className="block text-sm font-medium text-gray-700 mb-2">Role</label>
                         <select
                             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            {...register("userRole", {
-                                required: 'Role is required.',
-                            })}
+                            {...register("userRole", )}
                             defaultValue=""
                         >
                             <option value="" disabled >Select your role</option>

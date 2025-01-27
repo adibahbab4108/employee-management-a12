@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 
 const AllEmployee = () => {
     const axiosPublic = useAxiosPublic();
+    const [view, setView] = useState(true)
     const { data: all_Employee, refetch } = useQuery({
         queryKey: ["allEmployee"],
         queryFn: async () => {
@@ -111,62 +112,127 @@ const AllEmployee = () => {
                 icon: "success",
             });
         }
-
+        if (!data.acknowledged) {
+            Swal.fire({
+                title: `${data.message}`,
+            });
+        }
     }
 
     return (
-        <div className="overflow-x-auto">
-            <table className="table w-full">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Designation</th>
-                        <th>Salary ($)</th>
-                        <th>Make HR</th>
-                        <th>Fire</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {all_Employee
-                        ?.filter((employee) => employee.isVerified)
-                        .map((employee) => (
-                            <tr key={employee._id}>
-                                <td>{employee.name}</td>
-                                <td>{employee.designation}</td>
-                                <td>
-                                    <input
-                                        onBlur={(e) => handleUpdateSalary(e, employee._id)}
-                                        type="number"
-                                        defaultValue={employee.salary}
-                                        className='text-center w-24 rounded-md '
-                                    />
-                                </td>
-                                <td>
-                                    {employee.role !== "hr" ?
-                                        <button
-                                            onClick={() => handleMakeHR(employee._id)}
-                                            className="btn btn-xs btn-primary"
-                                        >
-                                            Make HR
-                                        </button>
-                                        :
-                                        <button className='btn btn-xs btn-info'>HR</button>
-                                    }
-                                </td>
-                                <td>
-                                    <button
-                                        onClick={() => handleFire(employee._id)}
-                                        className="btn btn-error btn-xs text-white"
-                                    >
-                                        Fire
+        <div>
+            <button onClick={() => setView(!view)}
+                className={` px-6 py-3  rounded-full  ${view
+                        ? "bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-lg hover:shadow-2xl"
+                        : "bg-gradient-to-r from-green-500 to-green-700 text-white shadow-lg hover:shadow-2xl"
+                    }`}
+            >{view ? "Grid View" : "Table View"}</button>
+            {
+                view ? <>
+                    <div className="overflow-x-auto">
+                        <table className="table w-full">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Designation</th>
+                                    <th>Salary ($)</th>
+                                    <th>Make HR</th>
+                                    <th>Fire</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {all_Employee
+                                    ?.filter((employee) => employee.isVerified)
+                                    .map((employee) => (
+                                        <tr key={employee._id}>
+                                            <td>{employee.name}</td>
+                                            <td>{employee.designation}</td>
+                                            <td>
+                                                <input
+                                                    onBlur={(e) => handleUpdateSalary(e, employee._id)}
+                                                    type="number"
+                                                    defaultValue={employee.salary}
+                                                    className='text-center w-24 rounded-md '
+                                                />
+                                            </td>
+                                            <td>
+                                                {employee.role !== "hr" ?
+                                                    <button
+                                                        onClick={() => handleMakeHR(employee._id)}
+                                                        className="btn btn-xs btn-primary"
+                                                    >
+                                                        Make HR
+                                                    </button>
+                                                    :
+                                                    <button className='btn btn-xs btn-info'>HR</button>
+                                                }
+                                            </td>
+                                            <td>
+                                                <button
+                                                    onClick={() => handleFire(employee._id)}
+                                                    className="btn btn-error btn-xs text-white"
+                                                >
+                                                    Fire
 
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                </tbody>
-            </table>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </> : <>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+                        {all_Employee
+                            ?.filter((employee) => employee.isVerified)
+                            .map((employee) => (
+                                <div
+                                    key={employee._id}
+                                    className="p-4 bg-white shadow-md rounded-lg border border-gray-200"
+                                >
+                                    <h3 className="text-lg font-semibold text-gray-800">{employee.name}</h3>
+                                    <p className="text-gray-500 text-sm mt-1">{employee.designation}</p>
+                                    <div className="mt-2">
+                                        <label className="text-sm font-semibold text-gray-700">Salary ($):</label>
+                                        <input
+                                            onBlur={(e) => handleUpdateSalary(e, employee._id)}
+                                            type="number"
+                                            defaultValue={employee.salary}
+                                            className="block w-full mt-1 px-2 py-1 border rounded-md text-center"
+                                        />
+                                    </div>
+                                    <div className="flex items-center justify-between mt-4">
+                                        <div>
+                                            {employee.role !== "hr" ? (
+                                                <button
+                                                    onClick={() => handleMakeHR(employee._id)}
+                                                    className="px-3 py-1 bg-blue-500 text-white text-xs font-semibold rounded-md hover:bg-blue-600"
+                                                >
+                                                    Make HR
+                                                </button>
+                                            ) : (
+                                                <span className="px-3 py-1 bg-blue-300 text-white text-xs font-semibold rounded-md">
+                                                    HR
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <button
+                                                onClick={() => handleFire(employee._id)}
+                                                className="px-3 py-1 bg-red-500 text-white text-xs font-semibold rounded-md hover:bg-red-600"
+                                            >
+                                                Fire
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                    </div>
+
+                </>
+            }
         </div>
+
     );
 };
 

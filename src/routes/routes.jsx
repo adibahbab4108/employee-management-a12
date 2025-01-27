@@ -12,6 +12,8 @@ import ErrorPage from "../pages/ErrorPage";
 import EmployeeDetails from "../pages/Dashboard/HrDashboard/EmployeeDetails";
 import EmployeeRecords from "../pages/Dashboard/EmployeeRecords";
 import AllEmployee from "../pages/Dashboard/AdminDashboard/AllEmployee";
+import Payroll from "../pages/Dashboard/AdminDashboard/Payroll";
+import MessageRequest from "../pages/Dashboard/AdminDashboard/MessageRequest";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +50,7 @@ export const router = createBrowserRouter([
             path: "/dashboard/worksheet",
             element: <EmployeeWorkSheet />
           },
+          //HR part..............
           {
             path: "/dashboard/employee-list",
             element: <EmployeeList />
@@ -60,9 +63,18 @@ export const router = createBrowserRouter([
             path: "/dashboard/progress",
             element: <EmployeeRecords />
           },
+          //Admin part..........
           {
-            path:"/dashboard/employees",
+            path: "/dashboard/employees",
             element: <AllEmployee />
+          },
+          {
+            path: "/dashboard/payroll",
+            element: <Payroll />
+          },
+          {
+            path: "/dashboard/message-request",
+            element: <MessageRequest />
           }
         ]
       },

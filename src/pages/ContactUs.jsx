@@ -1,6 +1,9 @@
 import { useForm } from 'react-hook-form';
+import useAxiosPublic from '../hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
 
 const ContactUs = () => {
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -8,9 +11,15 @@ const ContactUs = () => {
     reset,
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    alert('Your message has been sent successfully!');
+  const onSubmit = async (submittedData) => {
+    console.log(submittedData);
+    const { data } = await axiosPublic.post('/contact-form-data', submittedData)
+    if (data.acknowledged) {
+      Swal.fire({
+        title: 'Your message has been sent successfully',
+        icon: 'success',
+      })
+    }
     reset(); // Reset form fields after submission
   };
 

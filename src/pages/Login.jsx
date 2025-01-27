@@ -5,6 +5,7 @@ import SocialLogin from '../components/SocialLogin/SocialLogin';
 import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
 const Login = () => {
+  
 
     const { signIn, setUser } = useAuth();
     const navigate = useNavigate();

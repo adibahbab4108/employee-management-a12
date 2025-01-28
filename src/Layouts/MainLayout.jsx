@@ -1,13 +1,15 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { useEffect } from "react";
 
 const MainLayout = () => {
+   
     const location = useLocation();
-    const isLoginRegiserPage = location.pathname.includes('/login') || 
-    location.pathname.includes('/register') || 
-    location.pathname.includes('/dashboard') ||
-    location.pathname.includes('/user') 
+    const isLoginRegiserPage = location.pathname.includes('/login') ||
+        location.pathname.includes('/register') ||
+        location.pathname.includes('/dashboard') ||
+        location.pathname.includes('/user')
 
     return (
         <div>

@@ -1,6 +1,6 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { EffectFade, Autoplay } from 'swiper/modules';
 import { useRef } from 'react';
 
 // Import Swiper styles
@@ -15,37 +15,30 @@ import img4 from '../../assets/Banner/slider4.jpg'
 
 const HomeSlider = () => {
 
-    const settings = {
-        spaceBetween: 30,
-        centeredSlides: true,
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            clickable: true,
-        },
-        navigation: true,
-        modules: [Autoplay, Pagination, Navigation],
-    };
-
     return (
         <>
             <Swiper
-                {...settings}
-                className="mySwiper"
+                effect={'fade'}
+                centeredSlides={true}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+                modules={[Autoplay, EffectFade]}
+
+                className="mySwiper brightness-50 bg-red-500 h-full w-full"
             >
                 <SwiperSlide>
-                    <img className='' src={img1} alt="Slide 1" />
+                    <img className='h-full w-full object-cover' src={img1} alt="Slide 1" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img className='' src={img2} alt="Slide 2" />
+                    <img className='h-full w-full object-cover' src={img2} alt="Slide 2" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img className='' src={img3} alt="Slide 3" />
+                    <img className='h-full w-full object-cover' src={img3} alt="Slide 3" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img className='' src={img4} alt="Slide 4" />
+                    <img className='h-full w-full object-cover' src={img4} alt="Slide 4" />
                 </SwiperSlide>
 
             </Swiper>

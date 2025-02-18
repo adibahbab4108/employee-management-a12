@@ -30,12 +30,17 @@ const Navbar = () => {
     };
 
     const links = <>
-        <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="dashboard">Dashboard</NavLink></li>
-        <li><NavLink to="contact-us">Contact Us</NavLink></li>
+        <li ><NavLink to="/"
+            className={({ isActive }) => isActive ? "bg-primary text-white" : "bg-white"}
+        >
+            Home
+        </NavLink>
+        </li>
+        <li><NavLink to="dashboard" className={({ isActive }) => isActive ? "bg-primary text-white" : "bg-white"}>Dashboard</NavLink></li>
+        <li><NavLink to="contact-us" className={({ isActive }) => isActive ? "bg-primary text-white" : "bg-white"}>Contact Us</NavLink></li>
     </>
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -59,7 +64,6 @@ const Navbar = () => {
             <div className="navbar-end">
                 {
                     user ? <>
-                        <h1 className="text-lg font-bold mr-4">Hi, <span className="font-medium">{user.displayName}</span></h1>
                         {
                             <div className="dropdown dropdown-hover dropdown-end z-10">
                                 <div tabIndex={0} role="button" className=" m-1">
@@ -71,14 +75,14 @@ const Navbar = () => {
                                     }
                                 </div>
                                 <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                                    <li><Link to='/user' className="btn">Profile</Link></li>
-                                    <li ><Link onClick={handleLogout} className="btn">Log Out</Link></li>
+                                    <li><Link to='/user' className="btn bg-secondary text-white">Profile</Link></li>
+                                    <li ><Link onClick={handleLogout} className="btn bg-secondary text-white">Log Out</Link></li>
                                 </ul>
                             </div>
                         }
                     </>
                         :
-                        <Link to="/login" className="btn">Login</Link>
+                        <Link to="/login" className="btn bg-primary text-white">Login</Link>
                 }
             </div>
         </div>

@@ -1,10 +1,11 @@
 import img1 from '../../assets/Services/recruitment.jpg'
 import img2 from '../../assets/Services/interviewing.jpeg'
 import img3 from '../../assets/Services/R.jpeg'
+import SectionTitle from '../shared/SectionTitle';
 const Services = () => {
     return (
         <div className="mt-20">
-            <h1 className="text-3xl font-bold text-center my-10">We Can Do More Than Just HR</h1>
+            <SectionTitle title="We Can Do More Than Just HR"/>
             <div className="flex gap-4 justify-around">
                 <div className="card card-compact bg-base-100 w-96 shadow-xl">
                     <figure>

@@ -26,7 +26,7 @@ const HomeSlider = () => {
                 }}
                 modules={[Autoplay, EffectFade]}
 
-                className="mySwiper brightness-50 bg-red-500 h-full w-full"
+                className="mySwiper brightness-50 h-full w-full"
             >
                 <SwiperSlide>
                     <img className='h-full w-full object-cover' src={img1} alt="Slide 1" />
